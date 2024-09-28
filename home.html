@@ -3,18 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farbverlauf Text</title>
+    <title>Tesla Game</title>
     <style>
-        .gradient-text {
-            font-size: 50px;
-            font-weight: bold;
-            background: linear-gradient(to right, green, yellow);
-            -webkit-background-clip: text;
-            color: transparent;
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2e2e2e; /* Dunkelgrauer Hintergrund */
+            font-family: Arial, sans-serif;
+        }
+
+        #gameArea {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #d1d1d1; /* Straßengrau */
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .road {
+            position: absolute;
+            top: 150px;
+            left: 50px;
+            width: 500px;
+            height: 100px;
+            background-color: #555;
+            border-radius: 10px;
+        }
+
+        .trafficLight {
+            position: absolute;
+            top: 140px;
+            left: 260px;
+            width: 20px;
+            height: 60px;
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .redLight {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            margin: 5px auto;
+        }
+
+        .greenLight {
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            border-radius: 50%;
+            margin: 5px auto;
+            display: none;
+        }
+
+        #teslaCar {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background-color: red;
+            top: 300px;
+            left: 100px;
+            border-radius: 10px;
+        }
+
+        #policeCar {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            background-color: blue;
+            top: -50px;
+            left: 100px;
+            border-radius: 10px;
+        }
+
+        #message {
+            position: absolute;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+            top: -40px;
+            left: 0;
+            display: none;
+        }
+
+        #resetButton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #ff4747;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <p class="gradient-text">Hallo</p>
+
+<div id="gameArea">
+    <div class="road"></div>
+    <div class="trafficLight">
+        <div class="redLight" id="redLight"></div>
+        <div class="greenLight" id="greenLight"></div>
+    </div>
+    <div id="teslaCar"></div>
+    <div id="policeCar">
+        <div id="message">Du bist über Rot gefahren! Das darfst du nicht machen!</div>
+    </div>
+    <button id="resetButton">Reset</button>
+</div>
+
+<script>
+    const teslaCar = document.getElementById('teslaCar');
+    const policeCar = document.getElementById('policeCar');
+    const message = document.getElementById('message');
+    const redLight = document.getElementById('redLight');
+    const greenLight = document.getElementById('greenLight');
+    const resetButton = document.getElementById('resetButton');
+
+    let teslaX = 100;
+    let teslaY = 300;
+    let policeX = 100;
+    let policeY = -50;
+    let policeChasing = false;
+
+    document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'ArrowUp':
+                teslaY -= 10;
+                break;
+            case 'ArrowDown':
+                teslaY += 10;
+                break;
+            case 'ArrowLeft':
+                teslaX -= 10;
+                break;
+            case 'ArrowRight':
+                teslaX += 10;
+                break;
+        }
+
+        teslaCar.style.left = teslaX + 'px';
+        teslaCar.style.top = teslaY + 'px';
+
+        checkTrafficLight();
+    });
+
+    function checkTrafficLight() {
+        if (teslaY < 220 && teslaY > 180 && teslaX > 240 && teslaX < 280) {
+            if (redLight.style.display !== 'none') {
+                startPoliceChase();
+            }
+        }
+    }
+
+    function startPoliceChase() {
+        policeChasing = true;
+        const chaseInterval = setInterval(() => {
+            if (policeY < teslaY) {
+                policeY += 5;
+            } else if (policeY > teslaY) {
+                policeY -= 5;
+            }
+            policeCar.style.top = policeY + 'px';
+
+            if (Math.abs(policeY - teslaY) < 10) {
+                clearInterval(chaseInterval);
+                showMessage();
+            }
+        }, 100);
+    }
+
+    function showMessage() {
+        message.style.display = 'block';
+        setTimeout(() => {
+            message.style.display = 'none';
+            policeY = -50;
+            policeCar.style.top = policeY + 'px';
+        }, 3000);
+    }
+
+    resetButton.addEventListener('click', () => {
+        teslaX = 100;
+        teslaY = 300;
+        policeY = -50;
+        policeChasing = false;
+
+        teslaCar.style.left = teslaX + 'px';
+        teslaCar.style.top = teslaY + 'px';
+        policeCar.style.top = policeY + 'px';
+        message.style.display = 'none';
+    });
+</script>
+
 </body>
 </html>
