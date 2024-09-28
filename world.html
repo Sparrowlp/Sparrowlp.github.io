@@ -33,11 +33,11 @@
             stroke-width: 1;
         }
         /* Beispielhafte Farben für die Bundesländer */
-        .bremen { fill: #0000ff; }
-        .hamburg { fill: #4169e1; }
-        .berlin { fill: #6495ed; }
-        .nrw { fill: #87cefa; }
-        .hessen { fill: #b0e0e6; }
+        .bremen { fill: #0000ff; } /* > 10 Millionen */
+        .hamburg { fill: #4169e1; } /* 8 - 10 Millionen */
+        .berlin { fill: #6495ed; } /* 5 - 8 Millionen */
+        .nrw { fill: #87cefa; } /* 3 - 5 Millionen */
+        .hessen { fill: #b0e0e6; } /* < 3 Millionen */
         .bayern { fill: #afeeee; }
         .baden { fill: #e0ffff; }
         .sachsen { fill: #f0e68c; }
@@ -54,22 +54,21 @@
 
 <div id="map">
     <svg viewBox="0 0 800 600">
-        <!-- Hier musst du die tatsächlichen SVG-Pfade der Bundesländer hinzufügen -->
-        <g class="state bremen"><title>Bremen</title><path d="M...Z"/></g>
-        <g class="state hamburg"><title>Hamburg</title><path d="M...Z"/></g>
-        <g class="state berlin"><title>Berlin</title><path d="M...Z"/></g>
-        <g class="state nrw"><title>Nordrhein-Westfalen</title><path d="M...Z"/></g>
-        <g class="state hessen"><title>Hessen</title><path d="M...Z"/></g>
-        <g class="state bayern"><title>Bayern</title><path d="M...Z"/></g>
-        <g class="state baden"><title>Baden-Württemberg</title><path d="M...Z"/></g>
-        <g class="state sachsen"><title>Sachsen</title><path d="M...Z"/></g>
-        <g class="state sachsen_anhalt"><title>Sachsen-Anhalt</title><path d="M...Z"/></g>
-        <g class="state thuringen"><title>Thüringen</title><path d="M...Z"/></g>
-        <g class="state mecklenburg"><title>Mecklenburg-Vorpommern</title><path d="M...Z"/></g>
-        <g class="state schleswig"><title>Schleswig-Holstein</title><path d="M...Z"/></g>
-        <g class="state brandenburg"><title>Brandenburg</title><path d="M...Z"/></g>
-        <g class="state rheinland"><title>Rheinland-Pfalz</title><path d="M...Z"/></g>
-        <g class="state niedersachsen"><title>Niedersachsen</title><path d="M...Z"/></g>
+        <g class="state bremen"><title>Bremen</title><path d="M400,300 L410,290 L420,290 L430,300 L420,310 Z"/></g>
+        <g class="state hamburg"><title>Hamburg</title><path d="M420,290 L450,280 L460,300 L450,320 L430,320 L420,300 Z"/></g>
+        <g class="state berlin"><title>Berlin</title><path d="M440,250 L460,240 L480,240 L490,260 L460,270 Z"/></g>
+        <g class="state nrw"><title>Nordrhein-Westfalen</title><path d="M450,300 L490,290 L510,310 L500,320 L470,320 L450,310 Z"/></g>
+        <g class="state hessen"><title>Hessen</title><path d="M470,320 L490,330 L520,330 L530,350 L500,360 L480,340 Z"/></g>
+        <g class="state bayern"><title>Bayern</title><path d="M480,360 L520,360 L530,380 L500,400 L480,380 Z"/></g>
+        <g class="state baden"><title>Baden-Württemberg</title><path d="M500,360 L540,360 L550,400 L510,420 L490,400 Z"/></g>
+        <g class="state sachsen"><title>Sachsen</title><path d="M520,400 L550,400 L570,420 L550,440 L520,420 Z"/></g>
+        <g class="state sachsen_anhalt"><title>Sachsen-Anhalt</title><path d="M490,320 L520,320 L530,340 L500,340 L490,330 Z"/></g>
+        <g class="state thuringen"><title>Thüringen</title><path d="M520,380 L540,380 L550,400 L530,410 L510,400 Z"/></g>
+        <g class="state mecklenburg"><title>Mecklenburg-Vorpommern</title><path d="M400,250 L440,240 L450,260 L410,270 L400,260 Z"/></g>
+        <g class="state schleswig"><title>Schleswig-Holstein</title><path d="M450,240 L480,220 L490,240 L460,250 L450,240 Z"/></g>
+        <g class="state brandenburg"><title>Brandenburg</title><path d="M460,270 L490,260 L500,280 L470,290 L460,270 Z"/></g>
+        <g class="state rheinland"><title>Rheinland-Pfalz</title><path d="M470,290 L490,280 L510,300 L490,310 L470,300 Z"/></g>
+        <g class="state niedersachsen"><title>Niedersachsen</title><path d="M420,320 L450,310 L470,320 L450,340 L430,340 Z"/></g>
     </svg>
     <div class="legend">
         <h3>Einwohnerzahl Legende</h3>
