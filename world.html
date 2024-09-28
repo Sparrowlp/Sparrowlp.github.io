@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karte von Deutschland</title>
+    <style>
+        body {
+            background-color: #333; /* Dunkelgrauer Hintergrund */
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+        .legend {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .legend div {
+            margin: 5px 0;
+        }
+        .state {
+            fill: #add8e6; /* Standardfarbe für die Bundesländer */
+            stroke: #ffffff;
+            stroke-width: 1;
+        }
+        /* Beispielhafte Farben für die Bundesländer */
+        .bremen { fill: #0000ff; }
+        .hamburg { fill: #4169e1; }
+        .berlin { fill: #6495ed; }
+        .nrw { fill: #87cefa; }
+        .hessen { fill: #b0e0e6; }
+        .bayern { fill: #afeeee; }
+        .baden { fill: #e0ffff; }
+        .sachsen { fill: #f0e68c; }
+        .sachsen_anhalt { fill: #ffd700; }
+        .thuringen { fill: #ffebcd; }
+        .mecklenburg { fill: #ffa07a; }
+        .schleswig { fill: #ff6347; }
+        .brandenburg { fill: #ff4500; }
+        .rheinland { fill: #dc143c; }
+        .berlin { fill: #8b0000; }
+        .niedersachsen { fill: #f08080; }
+    </style>
+</head>
+<body>
+
+<div id="map">
+    <svg viewBox="0 0 800 600">
+        <g class="state bremen"><title>Bremen</title><path d="M...Z"/></g>
+        <g class="state hamburg"><title>Hamburg</title><path d="M...Z"/></g>
+        <g class="state berlin"><title>Berlin</title><path d="M...Z"/></g>
+        <g class="state nrw"><title>Nordrhein-Westfalen</title><path d="M...Z"/></g>
+        <g class="state hessen"><title>Hessen</title><path d="M...Z"/></g>
+        <g class="state bayern"><title>Bayern</title><path d="M...Z"/></g>
+        <g class="state baden"><title>Baden-Württemberg</title><path d="M...Z"/></g>
+        <g class="state sachsen"><title>Sachsen</title><path d="M...Z"/></g>
+        <g class="state sachsen_anhalt"><title>Sachsen-Anhalt</title><path d="M...Z"/></g>
+        <g class="state thuringen"><title>Thüringen</title><path d="M...Z"/></g>
+        <g class="state mecklenburg"><title>Mecklenburg-Vorpommern</title><path d="M...Z"/></g>
+        <g class="state schleswig"><title>Schleswig-Holstein</title><path d="M...Z"/></g>
+        <g class="state brandenburg"><title>Brandenburg</title><path d="M...Z"/></g>
+        <g class="state rheinland"><title>Rheinland-Pfalz</title><path d="M...Z"/></g>
+        <g class="state niedersachsen"><title>Niedersachsen</title><path d="M...Z"/></g>
+    </svg>
+    <div class="legend">
+        <h3>Einwohnerzahl Legende</h3>
+        <div><div style="background-color: #0000ff; width: 20px; height: 20px; display: inline-block;"></div> > 10 Millionen</div>
+        <div><div style="background-color: #4169e1; width: 20px; height: 20px; display: inline-block;"></div> 8 - 10 Millionen</div>
+        <div><div style="background-color: #6495ed; width: 20px; height: 20px; display: inline-block;"></div> 5 - 8 Millionen</div>
+        <div><div style="background-color: #87cefa; width: 20px; height: 20px; display: inline-block;"></div> 3 - 5 Millionen</div>
+        <div><div style="background-color: #b0e0e6; width: 20px; height: 20px; display: inline-block;"></div> < 3 Millionen</div>
+    </div>
+</div>
+
+</body>
+</html>
