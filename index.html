@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Weiterleitung</title>
+  <script>
+    window.onload = () => {
+      const text = "DEIN TEXT HIER";
+
+      navigator.clipboard.writeText(text).then(() => {
+        window.location.href = "https://www.google.com";
+      });
+    };
+  </script>
+</head>
+<body>
+</body>
+</html>
