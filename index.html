@@ -1,18 +1,201 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Weiterleitung</title>
-  <script>
-    window.onload = () => {
-      const text = "DEIN TEXT HIER";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Der aus den Docks – Hypertext Projekt</title>
 
-      navigator.clipboard.writeText(text).then(() => {
-        window.location.href = "https://www.google.com";
-      });
-    };
-  </script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+body {
+  font-family: 'Oswald', sans-serif;
+  background:#0b0f14;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+nav {
+  position:fixed;
+  width:100%;
+  top:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+  padding:20px 40px;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:500;
+  letter-spacing:1px;
+}
+
+/* HERO */
+.hero {
+  height:100vh;
+  background:url("https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg") center/cover no-repeat fixed;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(4px);
+}
+
+.hero h1 {
+  font-size:4rem;
+  z-index:2;
+  text-shadow:0 0 20px black;
+}
+
+/* SECTIONS */
+section {
+  padding:100px 10%;
+}
+
+h2 {
+  font-size:2.5rem;
+  margin-bottom:20px;
+  border-left:5px solid #4db8ff;
+  padding-left:15px;
+}
+
+.text-box {
+  font-size:1.2rem;
+  line-height:1.8;
+  max-width:900px;
+}
+
+.hyper {
+  color:#4db8ff;
+  cursor:pointer;
+  text-decoration:underline;
+}
+
+/* "SUBPAGES" */
+.subpage {
+  display:none;
+  min-height:100vh;
+  padding:120px 12%;
+  background:#0f1620;
+  animation:fadeIn 0.6s ease;
+}
+
+.back-btn {
+  display:inline-block;
+  margin-bottom:40px;
+  color:#4db8ff;
+  cursor:pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+</style>
 </head>
+
 <body>
+
+<nav>
+  <div>⚓ Der aus den Docks</div>
+  <div><a href="#" onclick="showHome()">Start</a></div>
+</nav>
+
+<!-- STARTSEITE -->
+<div id="homePage">
+  <div class="hero">
+    <h1>DER AUS DEN DOCKS</h1>
+  </div>
+
+  <section>
+    <h2>Klappentext</h2>
+    <div class="text-box">
+      Zwei Jungen geraten durch die Rettung eines Hundes in Hamburgs Hafen in einen Strudel aus
+      <span class="hyper" onclick="openPage('abenteuer')">lebensgefährlichen Abenteuern</span>.
+      Dabei stoßen sie auf dunkle Geheimnisse, erleben die
+      <span class="hyper" onclick="openPage('feindschaft')">Feindschaft</span> zweier
+      <span class="hyper" onclick="openPage('brueder')">Brüder</span>,
+      entdecken erste <span class="hyper" onclick="openPage('liebe')">Liebe</span>,
+      tiefe <span class="hyper" onclick="openPage('freundschaft')">Freundschaft</span>
+      und geraten in <span class="hyper" onclick="openPage('machenschaften')">finstere Machenschaften in den Docks</span>.
+      Der Autor <span class="hyper" onclick="openPage('autor')">Mario Giordano</span> verbindet Spannung mit Gefühl vor der rauen Kulisse des Hamburger Hafens.
+    </div>
+  </section>
+</div>
+
+<!-- UNTERSEITEN -->
+
+<div id="abenteuer" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Lebensgefährliche Abenteuer</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="feindschaft" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Feindschaft zweier Brüder</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="brueder" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Brüder</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="liebe" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Liebe</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="freundschaft" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Freundschaft</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="machenschaften" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Finstere Machenschaften in den Docks</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<div id="autor" class="subpage">
+  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <h2>Mario Giordano</h2>
+  <p>Example – Hier kommt später dein Text rein.</p>
+</div>
+
+<script>
+function openPage(id) {
+  document.getElementById("homePage").style.display = "none";
+  document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function showHome() {
+  document.getElementById("homePage").style.display = "block";
+  document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
+  window.scrollTo(0,0);
+}
+</script>
+
 </body>
 </html>
