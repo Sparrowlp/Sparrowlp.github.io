@@ -3,41 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Der aus den Docks – Hypertext Projekt</title>
+<title>Der aus den Docks – Hypertext Deluxe</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+/* =================== BASIS =================== */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
 
 body {
-  font-family: 'Oswald', sans-serif;
-  background:#0b0f14;
+  font-family:'Oswald', sans-serif;
+  background:#0a0f15;
   color:white;
   overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* =================== NAVIGATION =================== */
 nav {
   position:fixed;
   width:100%;
   top:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
-  padding:20px 40px;
-  z-index:1000;
+  left:0;
+  padding:18px 40px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0));
+  backdrop-filter:blur(6px);
 }
 
 nav a {
   color:white;
   text-decoration:none;
-  margin-left:20px;
+  margin-left:25px;
   font-weight:500;
   letter-spacing:1px;
+  transition:0.3s;
 }
 
-/* HERO */
+nav a:hover { color:#4db8ff; }
+
+/* =================== HERO =================== */
 .hero {
   height:100vh;
   background:url("https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg") center/cover no-repeat fixed;
@@ -53,58 +62,100 @@ nav a {
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(3px);
 }
 
 .hero h1 {
-  font-size:4rem;
+  font-size:4.5rem;
   z-index:2;
-  text-shadow:0 0 20px black;
+  text-shadow:0 0 30px black;
+  animation:fadeSlide 2s ease forwards;
 }
 
-/* SECTIONS */
+@keyframes fadeSlide {
+  from { opacity:0; transform:translateY(60px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* =================== SEKTIONEN =================== */
 section {
-  padding:100px 10%;
+  padding:120px 12%;
+  position:relative;
 }
 
 h2 {
-  font-size:2.5rem;
-  margin-bottom:20px;
-  border-left:5px solid #4db8ff;
+  font-size:2.8rem;
+  margin-bottom:25px;
+  border-left:6px solid #4db8ff;
   padding-left:15px;
 }
 
 .text-box {
-  font-size:1.2rem;
-  line-height:1.8;
+  font-size:1.25rem;
+  line-height:1.9;
   max-width:900px;
 }
 
+/* =================== HYPERTEXT =================== */
 .hyper {
   color:#4db8ff;
   cursor:pointer;
   text-decoration:underline;
+  transition:0.3s;
 }
 
-/* SUBPAGES */
+.hyper:hover {
+  color:#82d1ff;
+}
+
+/* =================== KRÄNE ANIMATION =================== */
+.crane {
+  position:absolute;
+  bottom:-250px;
+  width:280px;
+  opacity:0;
+  transition:2s ease;
+}
+
+.crane.left { left:5%; }
+.crane.right { right:5%; }
+
+.crane.visible {
+  bottom:0;
+  opacity:0.45;
+}
+
+/* =================== UNTERSEITEN =================== */
 .subpage {
   display:none;
   min-height:100vh;
-  padding:120px 12%;
-  background:#0f1620;
-  animation:fadeIn 0.6s ease;
+  padding:140px 12%;
+  background:#0e1621;
+  animation:pageFade 0.7s ease;
+}
+
+@keyframes pageFade {
+  from { opacity:0; transform:translateY(40px); }
+  to { opacity:1; transform:translateY(0); }
 }
 
 .back-btn {
-  display:inline-block;
-  margin-bottom:40px;
   color:#4db8ff;
   cursor:pointer;
+  margin-bottom:40px;
+  display:inline-block;
+  font-size:1.1rem;
 }
 
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(30px); }
-  to { opacity:1; transform:translateY(0); }
+.back-btn:hover { color:#82d1ff; }
+
+/* =================== FOOTER =================== */
+footer {
+  text-align:center;
+  padding:50px;
+  background:#05080c;
+  color:#777;
+  font-size:0.9rem;
 }
 </style>
 </head>
@@ -113,11 +164,12 @@ h2 {
 
 <nav>
   <div>⚓ Der aus den Docks</div>
-  <div><a href="#" onclick="showHome()">Start</a></div>
+  <div><a onclick="showHome()">Start</a></div>
 </nav>
 
-<!-- STARTSEITE -->
+<!-- =================== STARTSEITE =================== -->
 <div id="homePage">
+
   <div class="hero">
     <h1>DER AUS DEN DOCKS</h1>
   </div>
@@ -132,71 +184,82 @@ h2 {
       entdecken erste <span class="hyper" onclick="openPage('liebe')">Liebe</span>,
       tiefe <span class="hyper" onclick="openPage('freundschaft')">Freundschaft</span>
       und geraten in <span class="hyper" onclick="openPage('machenschaften')">finstere Machenschaften in den Docks</span>.
-      Der Autor <span class="hyper" onclick="openPage('autor')">Mario Giordano</span> verbindet Spannung mit Gefühl vor der rauen Kulisse des Hamburger Hafens.
+      Der Autor <span class="hyper" onclick="openPage('autor')">Mario Giordano</span>.
     </div>
+
+    <img src="https://pngimg.com/uploads/crane/crane_PNG43.png" class="crane left">
+    <img src="https://pngimg.com/uploads/crane/crane_PNG44.png" class="crane right">
   </section>
+
+  <footer>Hypertext Schulprojekt – Hamburger Hafen Edition</footer>
 </div>
 
-<!-- UNTERSEITEN -->
+<!-- =================== UNTERSEITEN =================== -->
 
 <div id="abenteuer" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Lebensgefährliche Abenteuer</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <div id="feindschaft" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Feindschaft zweier Brüder</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <div id="liebe" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Liebe</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <div id="freundschaft" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Freundschaft</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <div id="machenschaften" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Finstere Machenschaften in den Docks</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <div id="autor" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
+  <div class="back-btn" onclick="showHome()">← Zurück</div>
   <h2>Mario Giordano</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
 <script>
-let lastScrollPosition = 0;
+let lastScroll = 0;
 
+// Unterseite öffnen
 function openPage(id) {
-  const textSection = document.getElementById("klappentext");
-  lastScrollPosition = textSection.offsetTop - 80;
-
+  lastScroll = window.scrollY;
   document.getElementById("homePage").style.display = "none";
   document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
   document.getElementById(id).style.display = "block";
   window.scrollTo(0,0);
 }
 
+// Zurück zur Startseite
 function showHome() {
   document.getElementById("homePage").style.display = "block";
   document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
-
-  window.scrollTo({
-    top: lastScrollPosition,
-    behavior: "smooth"
-  });
+  window.scrollTo({ top: lastScroll, behavior: "smooth" });
 }
+
+// Kräne beim Scrollen einblenden
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".crane").forEach(crane => {
+    const trigger = window.innerHeight * 0.85;
+    if (crane.getBoundingClientRect().top < trigger) {
+      crane.classList.add("visible");
+    }
+  });
+});
 </script>
 
 </body>
