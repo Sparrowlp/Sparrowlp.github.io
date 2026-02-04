@@ -86,7 +86,7 @@ h2 {
   text-decoration:underline;
 }
 
-/* "SUBPAGES" */
+/* SUBPAGES */
 .subpage {
   display:none;
   min-height:100vh;
@@ -122,14 +122,13 @@ h2 {
     <h1>DER AUS DEN DOCKS</h1>
   </div>
 
-  <section>
+  <section id="klappentext">
     <h2>Klappentext</h2>
     <div class="text-box">
       Zwei Jungen geraten durch die Rettung eines Hundes in Hamburgs Hafen in einen Strudel aus
       <span class="hyper" onclick="openPage('abenteuer')">lebensgefährlichen Abenteuern</span>.
       Dabei stoßen sie auf dunkle Geheimnisse, erleben die
-      <span class="hyper" onclick="openPage('feindschaft')">Feindschaft</span> zweier
-      <span class="hyper" onclick="openPage('brueder')">Brüder</span>,
+      <span class="hyper" onclick="openPage('feindschaft')">Feindschaft zweier Brüder</span>,
       entdecken erste <span class="hyper" onclick="openPage('liebe')">Liebe</span>,
       tiefe <span class="hyper" onclick="openPage('freundschaft')">Freundschaft</span>
       und geraten in <span class="hyper" onclick="openPage('machenschaften')">finstere Machenschaften in den Docks</span>.
@@ -149,12 +148,6 @@ h2 {
 <div id="feindschaft" class="subpage">
   <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
   <h2>Feindschaft zweier Brüder</h2>
-  <p>Example – Hier kommt später dein Text rein.</p>
-</div>
-
-<div id="brueder" class="subpage">
-  <div class="back-btn" onclick="showHome()">← Zurück zum Hafen</div>
-  <h2>Brüder</h2>
   <p>Example – Hier kommt später dein Text rein.</p>
 </div>
 
@@ -186,8 +179,8 @@ h2 {
 let lastScrollPosition = 0;
 
 function openPage(id) {
-  // aktuelle Scrollposition merken (wo der Klappentext ist)
-  lastScrollPosition = document.getElementById("klappentext").offsetTop - 80;
+  const textSection = document.getElementById("klappentext");
+  lastScrollPosition = textSection.offsetTop - 80;
 
   document.getElementById("homePage").style.display = "none";
   document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
@@ -199,14 +192,12 @@ function showHome() {
   document.getElementById("homePage").style.display = "block";
   document.querySelectorAll(".subpage").forEach(p => p.style.display = "none");
 
-  // zurück zur Textstelle scrollen
   window.scrollTo({
     top: lastScrollPosition,
     behavior: "smooth"
   });
 }
 </script>
-
 
 </body>
 </html>
